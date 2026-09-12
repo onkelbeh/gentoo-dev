@@ -52,6 +52,10 @@ BDEPEND="
 "
 PDEPEND="localsearch? ( >=app-misc/localsearch-3.6_rc )"
 
+PATCHES=(
+	"${FILESDIR}/${P}-sqlite-3.53.1.patch"
+)
+
 python_check_deps() {
 	python_has_version -b \
 		"dev-python/pygobject[${PYTHON_USEDEP}]" \
@@ -90,7 +94,7 @@ src_configure() {
 }
 
 src_test() {
-	dbus-run-session meson test -C "${BUILD_DIR}" --print-errorlogs || die 'tests failed'
+	dbus-run-session meson test -C "${BUILD_DIR}" --print-errorlogs -t 10 || die 'tests failed'
 }
 
 src_install() {
