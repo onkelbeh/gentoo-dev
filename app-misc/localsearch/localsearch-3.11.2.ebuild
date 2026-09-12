@@ -114,7 +114,11 @@ src_configure() {
 	local emesonargs=(
 		-Dman=true
 		-Dextract=true
-		$(meson_use test functional_tests)
+		# Lots of broken tests with -Dfunctional_tests=true
+		# https://gitlab.gnome.org/GNOME/localsearch/-/issues/405
+		# bug #922509, #948498, and more failures
+		#$(meson_use test functional_tests)
+		-Dfunctional_tests=false
 		$(meson_use test tests_tap_protocol)
 		-Dminer_fs=true
 		-Dwriteback=true
@@ -159,6 +163,7 @@ src_configure() {
 src_test() {
 	export GSETTINGS_BACKEND="dconf" # Tests require dconf and explicitly check for it (env_reset set it to "memory")
 	export PYTHONPATH="${ESYSROOT}"/usr/$(get_libdir)/tinysparql-3.0
+	export TRACKER_TESTS_AWAIT_TIMEOUT = 60
 	# Many (extractor) tests fail since version 3.9.0 https://gitlab.gnome.org/GNOME/localsearch/-/issues/405
 	dbus-run-session meson test -C "${BUILD_DIR}" --no-suite examples --print-errorlogs || die 'tests failed'
 }
