@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{11..14} )
+PYTHON_COMPAT=( python3_{12..14} )
 inherit gnome.org meson-multilib python-any-r1
 
 DESCRIPTION="C++ interface for pango"
@@ -37,4 +37,11 @@ multilib_src_configure() {
 		$(meson_native_use_bool gtk-doc build-documentation)
 	)
 	meson_src_configure
+}
+
+multilib_src_install_all() {
+	if use gtk-doc; then
+		mkdir -p "${ED}"/usr/share/gtk-doc/html/ || die
+		mv "${ED}"/usr/share/doc/pangomm-1.4 "${ED}"/usr/share/gtk-doc/html/ || die
+	fi
 }
