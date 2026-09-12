@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..14} )
+PYTHON_COMPAT=( python3_{12..14} )
 inherit python-any-r1 cmake prefix
 
 CommitId=15f4784a3471d4db8b31720d528f2f57cd2b1f40
@@ -32,6 +32,7 @@ RESTRICT="!test? ( test )"
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.4.0_p20250418-AppxClock.patch
+	"${FILESDIR}"/${P}-Werror.patch
 )
 
 src_prepare() {
