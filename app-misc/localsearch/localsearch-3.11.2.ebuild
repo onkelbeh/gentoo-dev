@@ -13,7 +13,7 @@ HOMEPAGE="https://gnome.pages.gitlab.gnome.org/localsearch"
 LICENSE="GPL-2+ LGPL-2.1+"
 SLOT="3"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~loong ~ppc ~ppc64 ~riscv ~sparc ~x86"
-IUSE="cue exif gif gsf +gstreamer iptc +iso +jpeg +pdf +playlist raw seccomp test +tiff upower webp +xml xmp xps zip"
+IUSE="cue exif gsf +gstreamer iptc +iso +jpeg +pdf +playlist raw seccomp test +tiff upower webp +xml xmp xps zip"
 
 REQUIRED_USE="cue? ( gstreamer )" # cue is currently only supported via gstreamer, not ffmpeg
 RESTRICT="!test? ( test )"
@@ -42,8 +42,6 @@ RDEPEND="
 	pdf? ( >=app-text/poppler-0.16.0:=[cairo] )
 	playlist? ( >=dev-libs/totem-pl-parser-3:= )
 	webp? ( media-libs/libwebp )
-
-	gif? ( media-libs/giflib:= )
 
 	app-arch/gzip
 
@@ -133,7 +131,7 @@ src_configure() {
 		-Dlandlock=disabled
 		$(meson_feature cue)
 		$(meson_feature exif)
-		$(meson_feature gif)
+		-Dgif=disabled
 		$(meson_feature gsf)
 		$(meson_feature iptc)
 		$(meson_feature iso)
