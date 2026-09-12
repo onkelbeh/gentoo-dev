@@ -5,7 +5,7 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{12..14} )
 
-inherit bash-completion-r1 flag-o-matic gnome.org gnome2-utils linux-info meson python-any-r1 systemd vala xdg
+inherit flag-o-matic gnome.org gnome2-utils linux-info meson python-any-r1 shell-completion systemd vala xdg
 
 DESCRIPTION="Low-footprint RDF triple store with SPARQL 1.1 interface"
 HOMEPAGE="https://gnome.pages.gitlab.gnome.org/tinysparql"
